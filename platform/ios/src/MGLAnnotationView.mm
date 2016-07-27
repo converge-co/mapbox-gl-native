@@ -145,6 +145,7 @@
     {
         UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         recognizer.delegate = self;
+        recognizer.minimumPressDuration = 0;
         [self addGestureRecognizer:recognizer];
         _longPressRecognizer = recognizer;
     }

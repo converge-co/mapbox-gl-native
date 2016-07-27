@@ -449,13 +449,13 @@ static NSString * const MBXViewControllerAnnotationViewReuseIdentifer = @"MBXVie
             }
         }
         
-        MBXDroppedPinAnnotation *pin = [[MBXDroppedPinAnnotation alloc] init];
-        pin.coordinate = [self.mapView convertPoint:point
-                                 toCoordinateFromView:self.mapView];
-        pin.title = title ?: @"Dropped Pin";
-        pin.subtitle = [[[MGLCoordinateFormatter alloc] init] stringFromCoordinate:pin.coordinate];
-        // Calling `addAnnotation:` on mapView is not required since `selectAnnotation:animated` has the side effect of adding the annotation if required
-        [self.mapView selectAnnotation:pin animated:YES];
+//        MBXDroppedPinAnnotation *pin = [[MBXDroppedPinAnnotation alloc] init];
+//        pin.coordinate = [self.mapView convertPoint:point
+//                                 toCoordinateFromView:self.mapView];
+//        pin.title = title ?: @"Dropped Pin";
+//        pin.subtitle = [[[MGLCoordinateFormatter alloc] init] stringFromCoordinate:pin.coordinate];
+//        // Calling `addAnnotation:` on mapView is not required since `selectAnnotation:animated` has the side effect of adding the annotation if required
+//        [self.mapView selectAnnotation:pin animated:YES];
     }
 }
 
