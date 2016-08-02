@@ -613,7 +613,7 @@ static NSString * const MBXViewControllerAnnotationViewReuseIdentifer = @"MBXVie
     if (!annotationView)
     {
         annotationView = [[MBXAnnotationView alloc] initWithReuseIdentifier:MBXViewControllerAnnotationViewReuseIdentifer];
-        annotationView.frame = CGRectMake(0, 0, 10, 10);
+        annotationView.frame = CGRectMake(0, 0, 30, 30);
         annotationView.backgroundColor = [UIColor whiteColor];
         
         // uncomment to make the annotation view draggable
