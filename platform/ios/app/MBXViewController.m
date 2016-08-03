@@ -436,7 +436,7 @@ static NSString * const MBXViewControllerAnnotationViewReuseIdentifer = @"MBXVie
     [self.mapView showAnnotations:@[annotation] animated:YES];
 }
 
-- (IBAction)handleLongPress:(UILongPressGestureRecognizer *)longPress
+- (IBAction)handleLongPress:(UITapGestureRecognizer *)longPress
 {
     if (longPress.state == UIGestureRecognizerStateBegan)
     {

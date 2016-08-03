@@ -252,6 +252,7 @@
 		DAD165791CF4CDFF001FF4B9 /* MGLShapeCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = DAD165761CF4CDFF001FF4B9 /* MGLShapeCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAD1657A1CF4CDFF001FF4B9 /* MGLShapeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD165771CF4CDFF001FF4B9 /* MGLShapeCollection.m */; };
 		DAD1657B1CF4CDFF001FF4B9 /* MGLShapeCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD165771CF4CDFF001FF4B9 /* MGLShapeCollection.m */; };
+		E71D06861D518134003BC913 /* MBXDownPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E71D06821D517D24003BC913 /* MBXDownPressGestureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +515,8 @@
 		DAD1656B1CF41981001FF4B9 /* MGLFeature.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MGLFeature.mm; sourceTree = "<group>"; };
 		DAD165761CF4CDFF001FF4B9 /* MGLShapeCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGLShapeCollection.h; sourceTree = "<group>"; };
 		DAD165771CF4CDFF001FF4B9 /* MGLShapeCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGLShapeCollection.m; sourceTree = "<group>"; };
+		E71D06811D517D24003BC913 /* MBXDownPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBXDownPressGestureRecognizer.h; path = ../app/MBXDownPressGestureRecognizer.h; sourceTree = "<group>"; };
+		E71D06821D517D24003BC913 /* MBXDownPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBXDownPressGestureRecognizer.m; path = ../app/MBXDownPressGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -932,6 +935,8 @@
 		DAD165841CF4D06B001FF4B9 /* Annotations */ = {
 			isa = PBXGroup;
 			children = (
+				E71D06811D517D24003BC913 /* MBXDownPressGestureRecognizer.h */,
+				E71D06821D517D24003BC913 /* MBXDownPressGestureRecognizer.m */,
 				40EDA1BD1CFE0D4A00D9EA68 /* MGLAnnotationContainerView.h */,
 				40EDA1BE1CFE0D4A00D9EA68 /* MGLAnnotationContainerView.m */,
 				4018B1C51CDC277F00F666AF /* MGLAnnotationView.h */,
@@ -1389,6 +1394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E71D06861D518134003BC913 /* MBXDownPressGestureRecognizer.m in Sources */,
 				DA88485D1CBAFB9800AB86E3 /* MGLUserLocationAnnotationView.m in Sources */,
 				DAD165701CF41981001FF4B9 /* MGLFeature.mm in Sources */,
 				40EDA1C11CFE0E0500D9EA68 /* MGLAnnotationContainerView.m in Sources */,

@@ -2,7 +2,7 @@
 #import "MGLAnnotationView_Private.h"
 #import "MGLAnnotation.h"
 #import "MGLMapView_Internal.h"
-
+#import "MBXDownPressGestureRecognizer.h"
 #import "NSBundle+MGLAdditions.h"
 
 #include <mbgl/util/constants.hpp>
@@ -12,7 +12,7 @@
 @property (nonatomic, readwrite, nullable) NSString *reuseIdentifier;
 @property (nonatomic, readwrite, nullable) id <MGLAnnotation> annotation;
 @property (nonatomic, weak) UIPanGestureRecognizer *panGestureRecognizer;
-@property (nonatomic, weak) UILongPressGestureRecognizer *longPressRecognizer;
+@property (nonatomic, weak) MBXDownPressGestureRecognizer *longPressRecognizer;
 @property (nonatomic, weak) MGLMapView *mapView;
 
 @end
@@ -143,10 +143,10 @@
 {
     if (!_longPressRecognizer)
     {
-        UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        MBXDownPressGestureRecognizer *recognizer = [[MBXDownPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         recognizer.delegate = self;
-        recognizer.minimumPressDuration = 0;
-        recognizer.allowableMovement = 200;
+//        recognizer.minimumPressDuration = 0;
+//        recognizer.allowableMovement = 200;
         recognizer.delaysTouchesBegan = NO;
         recognizer.delaysTouchesEnded = YES;
         [self addGestureRecognizer:recognizer];
@@ -168,22 +168,27 @@
     [self removeGestureRecognizer:_panGestureRecognizer];
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender
+- (void)handleLongPress:(MBXDownPressGestureRecognizer *)sender
 {
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:
+            NSLog(@"State began");
             self.dragState = MGLAnnotationViewDragStateStarting;
             break;
         case UIGestureRecognizerStateChanged:
+            NSLog(@"State changed");
             self.dragState = MGLAnnotationViewDragStateDragging;
             break;
         case UIGestureRecognizerStateCancelled:
+            NSLog(@"State cancelled");
             self.dragState = MGLAnnotationViewDragStateCanceling;
             break;
         case UIGestureRecognizerStateEnded:
+            NSLog(@"State ended");
             self.dragState = MGLAnnotationViewDragStateEnding;
             break;
         case UIGestureRecognizerStateFailed:
+            NSLog(@"State failed");
             self.dragState = MGLAnnotationViewDragStateNone;
             break;
         case UIGestureRecognizerStatePossible:
@@ -193,9 +198,11 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender
 {
+    NSLog(@"Handling pan gesture for annotation...");
     self.center = [sender locationInView:sender.view.superview];
 
     if (sender.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"Ending from pan gesture!");
         self.dragState = MGLAnnotationViewDragStateNone;
     }
 }
@@ -203,6 +210,26 @@
 - (void)setDragState:(MGLAnnotationViewDragState)dragState
 {
     [self setDragState:dragState animated:YES];
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"CVGControlPointAnnotationView: touches began");
+//    self.dragState = MGLAnnotationViewDragStateStarting;
+}
+
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"CVGControlPointAnnotationView: touches moved");
+//    self.dragState = MGLAnnotationViewDragStateDragging;
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"CVGControlPointAnnotationView: touches ended");
+//    self.dragState = MGLAnnotationViewDragStateEnding;
+}
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"CVGControlPointAnnotationView: touches cancelled");
+//    self.dragState = MGLAnnotationViewDragStateCanceling;
 }
 
 - (void)setDragState:(MGLAnnotationViewDragState)dragState animated:(BOOL)animated
@@ -237,19 +264,24 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    BOOL isDragging = self.dragState == MGLAnnotationViewDragStateDragging;
+    BOOL isDragging = self.dragState == MGLAnnotationViewDragStateDragging || YES;
     
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class] && !(isDragging))
     {
+        NSLog(@"Preventing pan from starting because !isDragging");
         return NO;
     }
-
+    
+    if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
+        NSLog(@"Pan gesture should begin");
+    }
     return YES;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return otherGestureRecognizer == _longPressRecognizer || otherGestureRecognizer == _panGestureRecognizer;
+//        return otherGestureRecognizer == _panGestureRecognizer;
 }
 
 - (id<CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
